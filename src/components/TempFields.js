@@ -3,7 +3,8 @@ import {useFormik} from 'formik';
 
 const TempFields = (props) => {
   const client = props.client;
-  const generalTopic = props.generalTopic
+  const generalTopic = props.generalTopic;
+  const uid = props.uid;
   const max = props.tempMaxima;
   const aceitavel = props.tempAceitavel;
   const setMax = props.setTempMaxima;
@@ -19,8 +20,8 @@ const TempFields = (props) => {
     onSubmit: (values) => {
       setMax(values.max);
       setAceitavel(values.aceitavel);
-      client.publish(`${generalTopic}/max-temp`, values.max);
-      client.publish(`${generalTopic}/acceptable-temp`, values.aceitavel);
+      client.publish(`${generalTopic}/${uid}/max-temp`, values.max);
+      client.publish(`${generalTopic}/${uid}/acceptable-temp`, values.aceitavel);
       setConfig(!config);
     }
   });
